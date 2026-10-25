@@ -22,7 +22,7 @@ These are the intended features; the app is at an early concept stage. This proj
 |------------------------|------------------------|
 | `frontend/`            | frontend teammate      |
 | `backend/transit.py`   | backend teammate (bus logic) |
-| `backend/ai.py`        | Taha (the translator)  |
+| `backend/ai.py`        | Teammate  |
 | `backend/main.py`      | connects everything    |
 | `data/`                | the bus files          |
 
