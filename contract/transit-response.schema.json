@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Transit lookup response",
+  "description": "Normalized arrivals returned by backend/transit.py get_next_buses() for use by backend/ai.py write_answer() and the frontend. An empty array means no upcoming buses were found.",
+  "type": "array",
+  "items": {
+    "$ref": "bus.schema.json"
+  },
+  "examples": [
+    [
+      {
+        "route": "104",
+        "stop": "Stamp Student Union",
+        "arrives_in_min": 5
+      },
+      {
+        "route": "105",
+        "stop": "Stamp Student Union",
+        "arrives_in_min": 12
+      }
+    ],
+    []
+  ]
+}

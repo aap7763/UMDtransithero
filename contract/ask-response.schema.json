@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "POST /api/v1/ask success response",
+  "description": "JSON body returned by the backend to the frontend on a successful request.",
+  "type": "object",
+  "required": ["answer", "buses"],
+  "properties": {
+    "answer": {
+      "type": "string",
+      "derived": true,
+      "description": "A rider-facing explanation of upcoming buses."
+    },
+    "buses": {
+      "$ref": "transit-response.schema.json"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "answer": "The next bus is the 104, arriving in 5 minutes.",
+      "buses": [
+        {
+          "route": "104",
+          "stop": "Stamp Student Union",
+          "arrives_in_min": 5
+        },
+        {
+          "route": "105",
+          "stop": "Stamp Student Union",
+          "arrives_in_min": 12
+        }
+      ]
+    },
+    {
+      "answer": "No buses coming up right now.",
+      "buses": []
+    }
+  ]
+}

@@ -13,13 +13,15 @@
   <script>
     async function ask() {
       const question = document.getElementById("question").value;
-      const res = await fetch("http://localhost:5000/ask", {
+      const res = await fetch("http://localhost:5000/api/v1/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
       });
       const data = await res.json();
-      document.getElementById("answer").textContent = data.answer;
+      document.getElementById("answer").textContent = res.ok
+        ? data.answer
+        : data.error.message;
     }
   </script>
 </body>
