@@ -1,11 +1,12 @@
 """
-ai.py: the translator for UMDtransithero.
+ai.py: the translator for UMDtransithero. Owned by Taha.
 
-Turns a rider's typed sentence into structured data the transit backend can use.
+Turns a rider's typed sentence into structured data the transit backend can use,
+and turns the backend's bus list back into a plain-English answer.
 
-    parse_request("get me to the library before 5")
+    parse_question("get me to the library before 5")
     -> {"intent": "directions", "origin": None, "destination": "library",
-        "arrive_by": "17:00", "depart_at": None}
+        "arrive_by": "17:00", "depart_at": None, "stop": "library"}
 
 The AI only extracts what the user said. It never picks routes, stops, or buses;
 that is the transit backend's job. Time math happens in Python, not in the model.
@@ -135,6 +136,24 @@ def parse_request(sentence: str) -> dict:
     return _clean(raw)
 
 
+# ---- Functions the rest of the team's code calls ----
+
+
+def parse_question(question):
+    """Team interface: what main.py calls. Adds a 'stop' key for transit.py."""
+    parsed = parse_request(question)
+    parsed["stop"] = parsed["origin"] or parsed["destination"]
+    return parsed
+
+
+def write_answer(buses):
+    """Turn a list of buses into a friendly sentence."""
+    if not buses:
+        return "No buses coming up right now."
+    first = buses[0]
+    return f"The next bus is the {first['route']}, arriving in {first['arrives_in_min']} minutes."
+
+
 if __name__ == "__main__":
     tests = [
         "get me to the library before 5",
@@ -147,4 +166,7 @@ if __name__ == "__main__":
     print(f"Model: {MODEL}  (now {datetime.now().strftime('%H:%M')})\n")
     for sentence in tests:
         print(f"> {sentence}")
-        print(f"  {parse_request(sentence)}\n")
+        print(f"  {parse_question(sentence)}\n")
+
+    print(write_answer([{"route": "104", "arrives_in_min": 6}]))
+    print(write_answer([]))
