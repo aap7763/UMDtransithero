@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- Frontend — owned by the frontend teammate. -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>UMD Transit Hero</title>
+</head>
+<body>
+  <h1>UMD Transit Hero</h1>
+  <input id="question" placeholder="When's the next bus at Stamp?">
+  <button onclick="ask()">Ask</button>
+  <p id="answer"></p>
+  <script>
+    async function ask() {
+      const question = document.getElementById("question").value;
+      const res = await fetch("http://localhost:5000/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+      });
+      const data = await res.json();
+      document.getElementById("answer").textContent = data.answer;
+    }
+  </script>
+</body>
+</html>
