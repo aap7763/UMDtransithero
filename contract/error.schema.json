@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "API error response",
+  "description": "Shared JSON body for unsuccessful API responses. Return an appropriate non-2xx HTTP status alongside this body.",
+  "type": "object",
+  "required": ["error"],
+  "properties": {
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable explanation of the error."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "error": {
+        "code": "STOP_NOT_FOUND",
+        "message": "No stop with id 'S999'"
+      }
+    },
+    {
+      "error": {
+        "code": "BAD_REQUEST",
+        "message": "The question field must be a string."
+      }
+    }
+  ]
+}

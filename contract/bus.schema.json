@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Upcoming bus",
+  "description": "A normalized upcoming-bus record returned by backend/transit.py. Route identifiers are strings to preserve leading zeros and nonnumeric route names.",
+  "type": "object",
+  "required": ["route", "stop", "arrives_in_min"],
+  "properties": {
+    "route": {
+      "type": "string",
+      "description": "The route label shown to the rider (for example, GTFS route_short_name), not a GTFS route_id."
+    },
+    "stop": {
+      "type": "string",
+      "description": "The name of the stop for this arrival."
+    },
+    "arrives_in_min": {
+      "type": "integer",
+      "minimum": 0,
+      "derived": true,
+      "description": "Minutes until arrival; zero means arriving now."
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "route": "104",
+      "stop": "Stamp Student Union",
+      "arrives_in_min": 5
+    }
+  ]
+}

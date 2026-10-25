@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "POST /api/v1/ask request",
+  "description": "JSON body sent by the frontend to the backend. The backend currently defaults an omitted question to an empty string and ignores additional properties.",
+  "type": "object",
+  "properties": {
+    "question": {
+      "type": "string",
+      "default": "",
+      "description": "The rider's plain-English transit question."
+    }
+  },
+  "examples": [
+    {
+      "question": "When's the next bus at Stamp?"
+    },
+    {}
+  ]
+}

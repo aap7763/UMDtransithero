@@ -25,6 +25,15 @@ These are the intended features; the app is at an early concept stage. This proj
 | `backend/ai.py`        | Teammate  |
 | `backend/main.py`      | connects everything    |
 | `data/`                | the bus files          |
+| `contract/`            | shared JSON request/response schemas |
+
+## API contracts
+
+[`contract/`](contract/README.md) is the single source of truth for JSON shapes
+shared by the frontend, backend, and data integration. It contains JSON Schemas
+and examples for `POST /api/v1/ask`, internal transit lookups, normalized bus arrivals,
+and shared errors. The API uses the `/api/v1` base path; `/ask` remains a compatibility alias.
+Update the shared contracts when changing these interfaces.
 
 ## Run it
 ```

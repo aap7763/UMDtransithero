@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Transit lookup request",
+  "description": "The parsed lookup returned by backend/ai.py parse_question(). backend/main.py passes its stop field to backend/transit.py get_next_buses(stop_name). This is an internal shape, not an HTTP endpoint.",
+  "type": "object",
+  "required": ["stop"],
+  "properties": {
+    "stop": {
+      "type": "string",
+      "derived": true,
+      "description": "The stop name to look up in the transit data."
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "stop": "Stamp Student Union"
+    }
+  ]
+}
